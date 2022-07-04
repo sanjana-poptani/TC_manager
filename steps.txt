@@ -1,0 +1,36 @@
+1. django-admin startproject <project_name> .
+
+2. python manage.py startapp myfirstapp
+
+3. pip install pymongo[snappy,gssapi,srv,tls]
+
+4. pip install dnspython
+
+5. pip install djongo
+
+6. 
+DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'your-db-name',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': 'mongodb+srv://<username>:<password>@<atlas cluster>/<myFirstDatabase>?retryWrites=true&w=majority'
+            }  
+        }
+}
+
+7. 
+INSTALLED_APPS = [
+    'myfirstapp',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+8. python manage.py makemigrations <app-name>
+
+9. python manage.py migrate 
