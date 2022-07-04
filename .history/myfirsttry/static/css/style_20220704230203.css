@@ -139,7 +139,6 @@ form:after {
 }
 #content form { margin: 0 20px; position: relative }
 #content form input[type="text"],
-#content form input[type="email"],
 #content form input[type="password"] {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -165,7 +164,7 @@ form:after {
 	width: 80%;
 }
 #content form input[type="text"]:focus,
-#content form input[type="email"]:focus,
+#content form input[type="text"]:focus,
 #content form input[type="password"]:focus {
 	-webkit-box-shadow: 0 0 2px #ed1c24 inset;
 	-moz-box-shadow: 0 0 2px #ed1c24 inset;
