@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'myfirsttry',
+    'myfirs'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,12 +76,8 @@ WSGI_APPLICATION = 'TestCase_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'PROJECT 0',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host': 'mongodb+srv://Admin:Admin12345@tc-manager.fi7mrtn.mongodb.net/?retryWrites=true&w=majority'
-            }  
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

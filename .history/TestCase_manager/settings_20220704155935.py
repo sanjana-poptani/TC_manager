@@ -75,14 +75,7 @@ WSGI_APPLICATION = 'TestCase_manager.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'PROJECT 0',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host': 'mongodb+srv://Admin:Admin12345@tc-manager.fi7mrtn.mongodb.net/?retryWrites=true&w=majority'
-            }  
-    }
+    
 }
 
 

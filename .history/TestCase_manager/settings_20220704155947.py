@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'TestCase_manager.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE': 'djongo',
-            'NAME': 'PROJECT 0',
+            'NAME': 'your-db-name',
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': 'mongodb+srv://Admin:Admin12345@tc-manager.fi7mrtn.mongodb.net/?retryWrites=true&w=majority'
+                'host': 'mongodb+srv://<username>:<password>@<atlas cluster>/<myFirstDatabase>?retryWrites=true&w=majority'
             }  
     }
 }

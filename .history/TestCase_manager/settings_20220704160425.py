@@ -80,7 +80,7 @@ DATABASES = {
             'NAME': 'PROJECT 0',
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': 'mongodb+srv://Admin:Admin12345@tc-manager.fi7mrtn.mongodb.net/?retryWrites=true&w=majority'
+                'host': 'mongodb+srv://Admin:Admin12345@tc-manager.4jrfnig.mongodb.net/?retryWrites=true&w=majority'
             }  
     }
 }
