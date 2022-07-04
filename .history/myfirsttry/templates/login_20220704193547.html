@@ -22,25 +22,23 @@
 </head>
 
 <body>
-    <div class="container">
-        <section id="content">
-            <form action="">
-                <h1>Login Form</h1>
-                <div>
-                    <input type="text" placeholder="Username" required="" id="username" />
-                </div>
-                <div>
-                    <input type="password" placeholder="Password" required="" id="password" />
-                </div>
-                <div>
-                    <input type="submit" value="Log in" />
-                    <a href="#">Lost your password?</a>
-                    <a href="#">Register</a>
-                </div>
-            </form><!-- form -->
-            
-        </section><!-- content -->
-    </div><!-- container -->
+    <div class="login-form container"> {% if message %}
+
+        <!-- <ul class="messages">-->
+        <div class="alert alert-info"> {{ message }}
+
+        </div> {% endif %}
+
+        <form action="" method="post"> {% csrf_token %}
+
+            <div class="avatar"><i class="material-icons">&#xE7FF;
+        </i></div>
+            <h4 class="modal-title">Login to Your Account</h4>
+            <div class="form-group"><input type="text" name="username" class="form-control" placeholder="Username" required="required"></div>
+            <div class="form-group"><input type="password" name="password" class="form-control" placeholder="Password" required="required"></div>
+            <div class="form-group small clearfix"><a href="" class="forgot-link">Forgot Password?</a></div><input type="submit" class="btn btn-primary btn-block btn-lg" value="Login"></form>
+        <div class="text-center small" style="background-color: white;">Don't have an account? <a href="">Sign up</a></div>
+    </div>
 </body>
 
 </html>

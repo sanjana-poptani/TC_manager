@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>TestCase Manager</title>
+    <link rel="icon" href="../images/tc_icon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
+</head>
+
+<script type="text/javascript">
+    function changeImg(imgNumber) {
+        document.body.style.backgroundImage = 'url(https://source.unsplash.com/1600x800/?nature,land,sky,forest,flower)';
+    }
+    window.onload = changeImg;
+</script>
+
+
+<body>
+    <header>
+        <h1>Portal de Login</h1>
+    </header>
+    <main>
+        <form id="login_form" class="form_class" action="login/login-access.php" method="post">
+            <div class="form_div">
+                <label>Login:</label>
+                <input class="field_class" name="login_txt" type="text" placeholder="Insira o seu login" autofocus>
+                <label>Password:</label>
+                <input id="pass" class="field_class" name="password_txt" type="password" placeholder="Insira a sua senha">
+                <button class="submit_class" type="submit" form="login_form" onclick="return validarLogin()">Entrar</button>
+            </div>
+            <div class="info_div">
+                <p>Ainda não é um usuário registrado? <a href="register/reg-form.php">Cadastre-se!</a></p>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>Desenvolvido por <a href="#">JM_Code&trade;</a></p>
+    </footer>
+</body>
+
+</html>

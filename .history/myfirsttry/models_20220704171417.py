@@ -6,6 +6,6 @@ from djongo import models
 class User(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    uname = models.CharField(max_length=255)
+    uname = models.CharField(max_length=)
     email = models.EmailField()
     pwd = models.CharField(max_length=255)

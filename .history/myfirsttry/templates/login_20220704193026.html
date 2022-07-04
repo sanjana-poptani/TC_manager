@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Chat&Fresh</title>
+    <script type="text/javascript">
+        function changeImg(imgNumber) {
+            // var myImages = ["{% static '/bgimages/3.jpg' %}", "{% static '/bgimages/1.jpg' %}", "{% static '/bgimages/2.jpg' %}", "{% static '/bgimages/4.jpg' %}", "{% static '/bgimages/5.jpg' %}", "{% static '/bgimages/6.jpg' %}", "{% static '/bgimages/7.jpg' %}"];
+            // var imgShown = document.body.style.backgroundImage;
+            // var newImgNumber = Math.floor(Math.random() * myImages.length);
+            // document.body.style.backgroundImage = 'url(' + myImages[newImgNumber] + ')';
+            document.body.style.backgroundImage = 'url(https://source.unsplash.com/1600x800/?nature,forest,flower,fish,sky,desert)';
+        }
+        window.onload = changeImg;
+    </script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
+</head>
+
+<body>
+    <div class="login-form container"> {% if message %}
+
+        <!-- <ul class="messages">-->
+        <div class="alert alert-info"> {{ message }}
+
+        </div> {% endif %}
+
+        <form action="" method="post"> {% csrf_token %}
+
+            <div class="avatar"><i class="material-icons">&#xE7FF;
+        </i></div>
+            <h4 class="modal-title">Login to Your Account</h4>
+            <div class="form-group"><input type="text" name="username" class="form-control" placeholder="Username" required="required"></div>
+            <div class="form-group"><input type="password" name="password" class="form-control" placeholder="Password" required="required"></div>
+            <div class="form-group small clearfix"><a href="{% url 'forgot_pwd' %}" class="forgot-link">Forgot Password?</a></div><input type="submit" class="btn btn-primary btn-block btn-lg" value="Login"></form>
+        <div class="text-center small" style="background-color: white;">Don't have an account? <a href="{% url 'register' %}">Sign up</a></div>
+    </div>
+</body>
+
+</html>

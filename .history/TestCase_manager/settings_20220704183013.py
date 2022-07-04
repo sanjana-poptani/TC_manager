@@ -58,7 +58,7 @@ ROOT_URLCONF = 'TestCase_manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'myfirsttry/templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,7 +128,10 @@ TEMPLATE_DIRS = (
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'myfirsttry/static']
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATIC_ROOT = ("path/to/static_root")
 
 
 
