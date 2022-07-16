@@ -8,8 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render,HttpResponse
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password,check_password
-from .models import *
-from django.core.mail import send_mail
+from .models import *from django.core.mail import send_mail
 import math, random
 
 # Create your views here.
@@ -39,11 +38,11 @@ def signup(request):
 
         # email must be unique
         if User.objects.filter(email = email).first():
-            messages.error(request,'Email is already taken! Please try with another username')
+            messages.error('Email is already taken! Please try with another username')
 
         # username must be unique
         if User.objects.filter(uname = usrname).first():
-            messages.error(request,'Username is already taken! Please try with another username')
+            messages.error('Username is already taken! Please try with another username')
 
 
         pwdd = make_password(pwd)
@@ -55,26 +54,13 @@ def signup(request):
         user_obj = User.objects.create(uname = usrname,email = email,pwd = pwdd)
         user_obj.save()
 
-        # send otp
-        otp = generateOTP()
-        htmlgen = '<p>Your OTP is <strong>' + otp + '</strong></p>'
-        send_mail("OTP request",otp,'testprojects1117@gmail.com',[email],fail_silently=False,html_message = htmlgen)
-
-
-        messages.success(request,"Otp sent to your mail!")
+        messages.success(request,"Registration successful!")
         return redirect('/')
 
     else:
 
         return render(request,"signup.html")
 
-
-def generateOTP():
-    digits = "0123456789"
-    OTP = ""
-    for i in range(4) :
-        OTP += digits[math.floor(random.random() * 10)]
-    return OTP
 
 def cards(request):
     return render(request,"cards.html")

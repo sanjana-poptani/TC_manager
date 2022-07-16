@@ -43,7 +43,7 @@ def signup(request):
 
         # username must be unique
         if User.objects.filter(uname = usrname).first():
-            messages.error(request,'Username is already taken! Please try with another username')
+            messages.error('Username is already taken! Please try with another username')
 
 
         pwdd = make_password(pwd)

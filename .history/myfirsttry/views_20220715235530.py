@@ -39,11 +39,11 @@ def signup(request):
 
         # email must be unique
         if User.objects.filter(email = email).first():
-            messages.error(request,'Email is already taken! Please try with another username')
+            messages.error('Email is already taken! Please try with another username')
 
         # username must be unique
         if User.objects.filter(uname = usrname).first():
-            messages.error(request,'Username is already taken! Please try with another username')
+            messages.error('Username is already taken! Please try with another username')
 
 
         pwdd = make_password(pwd)
