@@ -162,15 +162,6 @@ def card_add(request):
     else:
         return redirect('/')
 
-
-def del_card(request,id):
-    if 'email' in request.session and 'id' in request.session:
-        obj = Card.objects.get(id = id)
-        obj.delete()
-        return redirect ('/cards')
-    else:
-        return redirect('/')
-
 def logout(request):
     if 'email' in request.session and 'id' in request.session:
         del request.session['email']

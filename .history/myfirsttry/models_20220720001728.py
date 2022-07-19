@@ -20,5 +20,5 @@ class User(models.Model):
 class Card(models.Model):
     id = models.AutoField(primary_key=True)
     release_num = models.IntegerField()
-    release_num_word = models.CharField(max_length=50)
+    release_num
     release_desc = models.TextField()

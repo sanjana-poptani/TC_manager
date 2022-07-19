@@ -169,7 +169,7 @@ def del_card(request,id):
         obj.delete()
         return redirect ('/cards')
     else:
-        return redirect('/')
+        return redirect('')
 
 def logout(request):
     if 'email' in request.session and 'id' in request.session:

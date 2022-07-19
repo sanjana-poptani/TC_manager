@@ -77,22 +77,8 @@
 
         {% if cards %}
 
-        {% for card in cards %} 
-        <div class="card">
-          <div class="box">
-            <div class="content">
-              <a id="edit">✎</a>
-              <a href="{% url 'del_card' card.id %}">🗑</a>
-              <h2>{{card.release_num}}</h2>
-              <h3>Release {{card.release_num_word}}</h3>
-              <p>{{card.release_desc}}</p>
-              <a href="#">Read More</a>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-
-        {% endif %}
+        
+        {% end if %}
       </div> 
 
       <!-- The popup -->

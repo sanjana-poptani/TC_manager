@@ -11,7 +11,6 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password,check_password
 from .models import *
 from django.contrib.sessions.models import Session
-Session.objects.all().delete()
 from django.core.mail import send_mail
 import math, random
 
@@ -153,21 +152,12 @@ def card_add(request):
             rnum = request.POST.get('rversion')
             desc = request.POST.get('rdesc')
 
-            word = num2words(rnum,to = 'ordinal')
+            word = num2words()
 
-            card_obj = Card.objects.create(release_num = rnum,release_num_word = word,release_desc = desc)
+            card_obj = Card.objects.create(release_num = rnum,release_desc = desc)
             card_obj.save()
 
         return redirect('/cards')
-    else:
-        return redirect('/')
-
-
-def del_card(request,id):
-    if 'email' in request.session and 'id' in request.session:
-        obj = Card.objects.get(id = id)
-        obj.delete()
-        return redirect ('/cards')
     else:
         return redirect('/')
 

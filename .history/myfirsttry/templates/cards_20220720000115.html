@@ -39,19 +39,13 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Add a card</h2>
-          <center><form action="{% url 'card_add' %}" method="post">
+          <center><form action="" method="post">
             {% csrf_token %}
             <input type="number" min="1" 
             style="width: 353px;margin-left: 18px;" 
             placeholder="release-version" 
             name="rversion"><br><br>
-
-
-            <textarea name="rdesc" 
-            style="resize:none;" id="" cols="50" rows="5" 
-            placeholder="release-description"></textarea><br><br>
-            
-            
+            <textarea name="rdesc" style="resize:none;" id="" cols="50" rows="5" placeholder="release-description"></textarea><br><br>
             <input type="submit" id="btn" style="width: 100px;" value="save">
           </form></center>
         </div>
@@ -75,24 +69,20 @@
           </div>
         </div>
 
-        {% if cards %}
 
-        {% for card in cards %} 
         <div class="card">
           <div class="box">
             <div class="content">
               <a id="edit">✎</a>
-              <a href="{% url 'del_card' card.id %}">🗑</a>
-              <h2>{{card.release_num}}</h2>
-              <h3>Release {{card.release_num_word}}</h3>
-              <p>{{card.release_desc}}</p>
+              <a>🗑</a>
+              <h2>01</h2>
+              <h3>Release One</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, totam velit? Iure nemo labore inventore?</p>
               <a href="#">Read More</a>
             </div>
           </div>
         </div>
-        {% endfor %}
 
-        {% endif %}
       </div> 
 
       <!-- The popup -->
