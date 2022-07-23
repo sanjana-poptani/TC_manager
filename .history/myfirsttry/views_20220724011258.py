@@ -241,14 +241,14 @@ def edit_scope(request,id,rid):
 
             obj.epic = epic
             obj.scope_desc = edesc
-            obj.release_id = release
+            obj.release_id = release_obj
             obj.save()
             return HttpResponseRedirect('/release_scope/' + str(rid))
 
         else:
             all_obj = Scope.objects.all()
             print("Yeaah reached here----------")
-            return render(request,"release_scope.html",{'scopes':all_obj,'edit_obj':obj,'release':release})
+            return render(request,"release_scope.html",{'scopes':all_obj,'edit_obj':obj})
 
     else:
         return redirect('/')

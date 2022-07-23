@@ -248,7 +248,7 @@ def edit_scope(request,id,rid):
         else:
             all_obj = Scope.objects.all()
             print("Yeaah reached here----------")
-            return render(request,"release_scope.html",{'scopes':all_obj,'edit_obj':obj,'release':release})
+            return render(request,"release_scope.html",{'scopes':all_obj,'edit_obj':obj})
 
     else:
         return redirect('/')

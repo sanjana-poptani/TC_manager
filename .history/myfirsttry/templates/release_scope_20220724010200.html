@@ -32,7 +32,7 @@
 
 <button id="btnn" style="float: right;margin-right: 15px;">+</button>
 
-<a href="{% url 'logout' %}" id="btnn1" style="width: 10%;
+<a href="" id="btnn1" style="width: 10%;
 margin-right: 20px;
 text-decoration: none;
 text-align:center;
@@ -57,10 +57,10 @@ padding-top: 12px;">Logout</a>
           <form action="{% url 'edit_scope' scope.id scope.release_id.id %}" method="post">
             {% csrf_token %}
           <div class="card__title">
-            <input type="text" name="epic" value="{{ scope.epic }}">
+            <input type="text" name="epic">
           </div>
             <br>
-            <textarea name="desc" id="" cols="155" style="resize: none;" rows="2">{{ scope.scope_desc }}</textarea>
+            <textarea name="desc" id="" cols="171" rows="2"></textarea>
             <br>
             <input type="submit" value="save" class="btn btn--block card__btn">
           </form>
@@ -74,7 +74,7 @@ padding-top: 12px;">Logout</a>
       <div class="card" style="width: 100%;">
         <div class="card__content">
           <div class="card__title" style="float: left;width:50%">{{ scope.epic }}</div>
-          <a class="card__title" href="{% url 'edit_scope' scope.id scope.release_id.id %}" style="display: flex; justify-content: flex-end;font-size: larger;flex-wrap: wrap;margin-top: -30px;margin-right: 40px;cursor: pointer;color: #696969;text-decoration: none;z-index: 3;">✎</a>
+          <a class="card__title" href="{% url 'edit_scope' scope.id scope.release_id.id %}" style="display: flex; justify-content: flex-end;font-size: larger;flex-wrap: wrap;margin-top: -30px;margin-right: 40px;cursor: pointer;color: #696969;text-decoration: none;z-index: ;">✎</a>
           <a class="card__title" href="{% url 'del_scope' scope.id %}" style="display: flex; justify-content: flex-end;font-size: x-large;flex-wrap: wrap;margin-top: -30px;color: #696969;margin-right: 10px;cursor: pointer;text-decoration: none;">🗑</a>
           <p class="card__text">{{ scope.scope_desc }}</p>
           <button class="btn btn--block">Go Inside</button>

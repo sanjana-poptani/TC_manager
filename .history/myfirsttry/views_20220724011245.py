@@ -233,7 +233,6 @@ def edit_card(request,id):
 def edit_scope(request,id,rid):
     if 'email' in request.session and 'id' in request.session:
         obj = Scope.objects.get(id = id)
-        release = Release.objects.get(id = rid)
         if request.method == 'POST':
             epic = request.POST.get('epic')
             edesc = request.POST.get('desc')
@@ -241,14 +240,14 @@ def edit_scope(request,id,rid):
 
             obj.epic = epic
             obj.scope_desc = edesc
-            obj.release_id = release
+            obj.release_id = release_obj
             obj.save()
             return HttpResponseRedirect('/release_scope/' + str(rid))
 
         else:
             all_obj = Scope.objects.all()
             print("Yeaah reached here----------")
-            return render(request,"release_scope.html",{'scopes':all_obj,'edit_obj':obj,'release':release})
+            return render(request,"release_scope.html",{'scopes':all_obj,'edit_obj':obj})
 
     else:
         return redirect('/')
