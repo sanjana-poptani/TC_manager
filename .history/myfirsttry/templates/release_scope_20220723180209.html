@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
+    <link rel="icon" type="image/x-icon" href="{% static '/images/tc_icon.ico' %}">
+    <title>Testcase_manager</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/release_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+    <script type="text/javascript">
+        function changeImg() {
+            document.body.style.backgroundImage = 'url(https://source.unsplash.com/1600x800/?nature,forest,flower,fish,sky,desert)';
+        }
+        window.onload = changeImg;
+    </script>
+</head>
+
+
+
+<body>
+    
+
+<ul class="cards">
+
+  {% if scopes %}
+
+    {% for scope in scopes %}
+    <li class="cards__item">
+      <div class="card">
+        <div class="card__content">
+          <div class="card__title" style="float: left;width:50%">{{scope.epic}}</div>
+          <a class="card__title" style="display: flex; justify-content: flex-end;font-size: larger;flex-wrap: wrap;margin-top: -30px;margin-right: 40px;">✎</a>
+          <a class="card__title" style="display: flex; justify-content: flex-end;font-size: x-large;flex-wrap: wrap;margin-top: -30px;margin-right: 10px;">🗑</a>
+          <p class="card__text">{{scope.scope_desc}}</p>
+          <button class="btn btn--block">Go Inside</button>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+    
+    <li class="cards__item">
+        <div class="card">
+          <div class="card__content">
+            <form action="" method="post">
+              {% csrf_token %}
+            <div class="card__title">
+              <input type="text">
+            </div>
+            <!-- <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up. Lets add another line of text here see what happends then</p> -->
+            <br>
+              <textarea name="" id="" cols="171" rows="2"></textarea>
+            <br>
+              <input type="submit" value="save" class="btn btn--block card__btn">
+            </form>
+          </div>
+        </div>
+      </li>
+      
+      {% else %}
+      <li class="cards__item">
+        <div class="card" style="width: 1000px;">
+          <div class="card__content">
+            <h1>There is no content to show :(</h1>
+          </div>
+        </div>
+      </li>
+
+      {% endif %}
+
+  </ul>
+
+  
+  <button id="btnn">+</button>
+
+  <!-- The popup -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Add a scope</h2>
+      <center><form action="{% url 'scope_add' release.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" min="1" 
+        style="width: 353px;margin-left: 18px;" 
+        placeholder="epic details" 
+        name="epic"><br><br>
+
+
+        <textarea name="edesc" 
+        style="resize:none;" id="" cols="50" rows="5" 
+        placeholder="epic-description"></textarea><br><br>
+        
+        
+        <input type="submit" id="btnn1" style="width: 100px;" value="save">
+      </form></center>
+    </div>
+
+  </div>
+
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("btnn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+
+    }
+    </script>
+    
+
+
+
+</body>
+</html>

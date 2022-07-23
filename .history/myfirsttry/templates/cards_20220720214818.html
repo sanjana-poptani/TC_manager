@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
+    <link rel="icon" type="image/x-icon" href="{% static '/images/tc_icon.ico' %}">
+    <title>Testcase_manager</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/card_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+        function changeImg() {
+            document.body.style.backgroundImage = 'url(https://source.unsplash.com/1600x800/?nature,forest,flower,fish,sky,desert)';
+        }
+        window.onload = changeImg;
+    </script>
+
+</head>
+<body>
+
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button id="btn" style="width: 100px;margin-left: 1100px;margin-top: 40px;">Logout</button>
+    </form>
+
+      <button id="btn1" style="margin-left: 1300px;z-index: 1;margin-top: -50px;">+</button>
+
+
+      <!-- The popup -->
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add a card</h2>
+          <center><form action="{% url 'card_add' %}" method="post">
+            {% csrf_token %}
+            <input type="number" min="1" 
+            style="width: 353px;margin-left: 18px;" 
+            placeholder="release-version" 
+            name="rversion"><br><br>
+
+
+            <textarea name="rdesc" 
+            style="resize:none;" id="" cols="50" rows="5" 
+            placeholder="release-description"></textarea><br><br>
+            
+            
+            <input type="submit" id="btn" style="width: 100px;" value="save">
+          </form></center>
+        </div>
+
+      </div>
+
+
+
+    <div class="container">
+
+        <div class="card">
+          <div class="box">
+            <div class="content">
+              <a id="edit">✎</a>
+              <a>🗑</a>
+              <h2>01</h2>
+              <h3>Release One</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, totam velit? Iure nemo labore inventore?</p>
+              <a href="#">Read More</a>
+            </div>
+          </div>
+        </div>
+
+        {% if cards %}
+
+        {% for card in cards %} 
+        <div class="card">
+          <div class="box">
+            <div class="content">
+              <a href="{% url 'edit_card' card.id %}">✎</a>
+              <a href="{% url 'del_card' card.id %}">🗑</a>
+              <h2>{{card.release_num}}</h2>
+              <h3>Release {{card.release_num_word}}</h3>
+              <p>{{card.release_desc}}</p>
+              <a href="#">Read More</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% endif %}
+      </div> 
+
+      {% if objj %}
+      <!-- The popup -->
+      <div id="myModal1" class="modal1">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close1">&times;</span>
+          <h2>Edit a card</h2>
+            <center>
+          <form action="" method="post">
+            {% csrf_token %}
+            <input type="number" min="1" style="width: 353px;margin-left: 18px;" placeholder="release-version" name="rversion" value="1"><br><br>
+            <textarea name="rdesc" style="resize:none;" id="" cols="50" rows="5" placeholder="release-description" >existing</textarea><br><br>
+            <input type="submit" id="btn" style="width: 100px;" value="save">
+          </form></center>
+        </div>
+
+      </div>
+
+      <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("btn1");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+
+        }
+        </script>
+        
+
+
+</body>
+</html>
