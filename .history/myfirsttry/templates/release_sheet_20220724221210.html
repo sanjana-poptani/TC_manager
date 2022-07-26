@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
+    <link rel="icon" type="image/x-icon" href="{% static '/images/tc_icon.ico' %}">
+    <title>Testcase_manager</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/release_sheet_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+        function changeImg() {
+            document.body.style.backgroundImage = 'url(https://source.unsplash.com/1600x800/?nature,forest,flower,fish,sky,desert)';
+        }
+        window.onload = changeImg;
+    </script>
+
+</head>
+<body>
+
+    
+  <a href="{% url 'cards' %}" id="btnn1" style="width: 10%;
+  margin-left: 15px;
+  text-decoration: none;
+  text-align:center;
+  float: left;
+  padding-top: 7px;">Back</a>
+
+<button id="btnn" style="float: right;margin-right: 15px;">+</button>
+
+<a href="{% url 'logout' %}" id="btnn1" style="width: 10%;
+margin-right: 20px;
+text-decoration: none;
+text-align:center;
+float: right;
+padding-top: 7px;">Logout</a>
+
+<br><br>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="8" style="text-align:center;">Epic Link: <a href="" style="color: #EDEDED;">google.com</a></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th colspan="8">
+                    <span style="float: left;margin-left:10px;">
+                    Title of the Testcase 
+                    </span>
+                    <a style="display: flex; 
+                    justify-content: flex-end;
+                    font-size: larger;
+                    float: left;
+                    flex-wrap: wrap;
+                    margin-left: 10px;
+                    cursor: pointer;
+                    color: lightgrey;
+                    text-decoration: none;
+                    z-index: 3;">✎</a>
+                    <span style="float: right;margin-right: 0px;"> 
+                    <button style="font-size:11.5px;"><i class="fa fa-search"></i></button>
+                    </span>
+                    <span  style="float: right;margin-right: 3px;">
+                    <select name="" id="">
+                        <option value="">YTS</option>
+                        <option value="">In Progress</option>
+                        <option value="">Pass</option>
+                        <option value="">Fail</option>
+                        <option value="">QA Skip</option>
+                    </select>
+                    </span>
+                    <span style="float:right;margin-right: 15px;">
+                    <select name="" id="">
+                        <option value="" selected disabled>Tester</option>
+                        <option value="Sanchaya">Sanchaya</option>
+                        <option value="Jency">Jency</option>
+                        <option value="Chandhiny">Chandhiny</option>
+                        <option value="Prithvi">Prithvi</option>
+                        <option value="Kedar">Kedar</option>
+                        <option value="Manjunath">Manjunath</option>
+                        <option value="Vaibhav">Vaibhav</option>
+                        <option value="Jency">Pranjali</option>
+                        <option value="Jency">HithaShree</option>
+                        <option value="Shilpa">Shilpa</option>
+                        <option value="Pradeep">Pradeep</option>
+                    </select>
+                    </span>
+                    
+                </th>
+            </tr>
+        </thead>
+        <thead>
+          <tr>
+            <th style="width: 10px;">Edit - Delete - Save</th>
+            <th style="width: 50px;">Use Case</th>
+            <th style="width: 350px;">Steps to execute</th>
+            <th style="width: 350px;">Expected Result</th>
+            <th style="width: 300px;">Test Status - Assignee</th>
+            <th style="width: 170px;">Tester's Comment</th>
+            <th style="width: 170px;">Reviewer's Comment</th>
+            <th style="width: 50px;">Testcase Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width: 10px;">
+                <a class="card__title" style="display: flex; 
+                justify-content: flex-end;
+                font-size: x-large;
+                flex-wrap: wrap;
+                cursor: pointer;
+                color: #696969;
+                text-decoration: none;
+                z-index: 3;">✎</a><br>
+                <a class="card__title" style="display: flex; 
+                justify-content: flex-end;
+                font-size: xx-large;
+                flex-wrap: wrap;
+                color: #696969;
+                cursor: pointer;
+                text-decoration: none;">🗑</a>
+            </td>
+            <td style="width: 50px;"><strong>showSpeed</strong></td>
+            <td style="width: 350px;">15 aajdh fkjsdhkjfh sdkjghkjsdh kfjsdhjfkdsh sjhdfkdjs fh sakjdfhjsdk fs dsjkfhdskhf s a fdskjadfh sdfkjsdhf sdkjf asjkdf skjdhfjsdfhfs sfdkjfd kjfdsjfdshdfkjfd  fjdfh
+                hfjkhdskj fsdkj fhdskj kjsafhsdjkfh jkfsdhfkl skjdfhjksdh 
+            </td>
+            <td style="width: 350px;">The speed of the show/reveal</td>
+            <td style="width: 300px;">
+                <strong>Portal: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select>
+                <br>
+                <strong>RM: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+                <strong>Internal: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select><br>
+                <strong>BE: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+                <strong>Ios: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+                <strong>Android: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select><br>
+                <strong>Automation: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+
+            </td>
+            <td style="width: 170px;">
+                <b>Sanchaya: </b> ksdfj dslhflksd dslkhfksd slkdfk dflskjf <br><br>
+                <b>Sanjana: </b> fsdkjhf sdjfhkl fdsjklfds slkdjfsd dskfj
+            </td>
+            <td style="width: 170px;">
+                dslkjf ldskjf fsdkljf kdjsf 
+            </td>
+            <td style="width: 50px;">
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select>
+            </td>
+          </tr>
+
+          {% if tcs %}
+          {% for tc in tcs %}
+          <tr>
+            <td style="width: 10px;">
+                <a class="card__title" style="display: flex; 
+                justify-content: flex-end;
+                font-size: x-large;
+                flex-wrap: wrap;
+                cursor: pointer;
+                color: #696969;
+                text-decoration: none;
+                z-index: 3;">✎</a><br>
+                <a class="card__title" style="display: flex; 
+                justify-content: flex-end;
+                font-size: xx-large;
+                flex-wrap: wrap;
+                color: #696969;
+                cursor: pointer;
+                text-decoration: none;">🗑</a>
+            </td>
+            <td style="width: 50px;"><strong>{{ tc.usecase }}</strong></td>
+            <td style="width: 350px;">15 aajdh fkjsdhkjfh sdkjghkjsdh kfjsdhjfkdsh sjhdfkdjs fh sakjdfhjsdk fs dsjkfhdskhf s a fdskjadfh sdfkjsdhf sdkjf asjkdf skjdhfjsdfhfs sfdkjfd kjfdsjfdshdfkjfd  fjdfh
+                hfjkhdskj fsdkj fhdskj kjsafhsdjkfh jkfsdhfkl skjdfhjksdh 
+            </td>
+            <td style="width: 350px;">The speed of the show/reveal</td>
+            <td style="width: 300px;">
+                <strong>Portal: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select>
+                <br>
+                <strong>RM: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+                <strong>Internal: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select><br>
+                <strong>BE: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+                <strong>Ios: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+                <strong>Android: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select><br>
+                <strong>Automation: </strong>
+                <select name="" id="">
+                    <option value="YTS">YTS</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Pass">In Progress</option>
+                    <option value="Fail">Fail</option>
+                    <option value="QA Skip">QA Skip</option>
+                    <option value="NA">NA</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select> <br>
+
+            </td>
+            <td style="width: 170px;">
+                <b>Sanchaya: </b> ksdfj dslhflksd dslkhfksd slkdfk dflskjf <br><br>
+                <b>Sanjana: </b> fsdkjhf sdjfhkl fdsjklfds slkdjfsd dskfj
+            </td>
+            <td style="width: 170px;">
+                dslkjf ldskjf fsdkljf kdjsf 
+            </td>
+            <td style="width: 50px;">
+                <select name="" id="">
+                    <option value="" selected disabled>Tester</option>
+                    <option value="Sanchaya">Sanchaya</option>
+                    <option value="Jency">Jency</option>
+                    <option value="Chandhiny">Chandhiny</option>
+                    <option value="Prithvi">Prithvi</option>
+                    <option value="Kedar">Kedar</option>
+                    <option value="Manjunath">Manjunath</option>
+                    <option value="Vaibhav">Vaibhav</option>
+                    <option value="Jency">Pranjali</option>
+                    <option value="Jency">HithaShree</option>
+                    <option value="Shilpa">Shilpa</option>
+                    <option value="Pradeep">Pradeep</option>
+                </select>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+          
+        </tbody>
+      </table>
+
+      
+</body>
+</html>

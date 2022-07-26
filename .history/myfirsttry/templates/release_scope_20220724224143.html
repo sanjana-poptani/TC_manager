@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
+    <link rel="icon" type="image/x-icon" href="{% static '/images/tc_icon.ico' %}">
+    <title>Testcase_manager</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/release_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+    <script type="text/javascript">
+        function changeImg() {
+            document.body.style.backgroundImage = 'url(https://source.unsplash.com/1600x800/?nature,forest,flower,fish,sky,desert)';
+        }
+        window.onload = changeImg;
+    </script>
+</head>
+
+
+
+<body>
+ 
+  <a href="{% url 'cards' %}" id="btnn1" style="width: 10%;
+  margin-left: 15px;
+  text-decoration: none;
+  text-align:center;
+  float: left;
+  padding-top: 12px;">Back</a>
+
+<button id="btnn" style="float: right;margin-right: 15px;">+</button>
+
+<a href="{% url 'logout' %}" id="btnn1" style="width: 10%;
+margin-right: 20px;
+text-decoration: none;
+text-align:center;
+float: right;
+padding-top: 12px;">Logout</a>
+
+
+  
+
+  <br><br><br><br>
+<ul class="cards">
+
+  {% if scopes %}
+
+    {% for scope in scopes %}
+
+    {% if edit_obj %}
+    {% if edit_obj.id == scope.id %}
+    <li class="cards__item">
+      <div class="card">
+        <div class="card__content">
+          <form action="{% url 'edit_scope' scope.id scope.release_id.id %}" method="post">
+            {% csrf_token %}
+          <div class="card__title">
+            <input type="text" name="epic" value="{{ scope.epic }}">
+          </div>
+            <br>
+            <textarea name="desc" id="" cols="155" style="resize: none;" rows="2">{{ scope.scope_desc }}</textarea>
+            <br>
+            <input type="submit" value="save" class="btn btn--block card__btn">
+          </form>
+        </div>
+      </div>
+    </li>
+    {% endif %}
+
+    {% else %}
+    <li class="cards__item" style="width: 100%;">
+      <div class="card" style="width: 100%;">
+        <div class="card__content">
+          <div class="card__title" style="float: left;width:50%">{{ scope.epic }}</div>
+          <a class="card__title" href="{% url 'edit_scope' scope.id scope.release_id.id %}" style="display: flex; justify-content: flex-end;font-size: larger;flex-wrap: wrap;margin-top: -30px;margin-right: 40px;cursor: pointer;color: #696969;text-decoration: none;z-index: 3;">✎</a>
+          <a class="card__title" href="{% url 'del_scope' scope.id %}" style="display: flex; justify-content: flex-end;font-size: x-large;flex-wrap: wrap;margin-top: -30px;color: #696969;margin-right: 10px;cursor: pointer;text-decoration: none;">🗑</a>
+          <p class="card__text">{{ scope.scope_desc }}</p>
+          <button class="btn btn--block"><a href="" style="text-decoration: none;color: #696969;" onmouseover="this.style.color='white'" onmousemove="this.style.color"> Go Inside </a></button>
+        </div>
+      </div>
+    </li>
+
+    {% endif %}
+    {% endfor %}
+    
+    
+      
+      {% else %}
+      <li class="cards__item">
+        <div class="card" style="width: 1000px;">
+          <div class="card__content">
+            <h1>There is no content to show :(</h1>
+          </div>
+        </div>
+      </li>
+
+      {% endif %}
+
+  </ul>
+
+  
+
+  <!-- The popup -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Add a scope</h2>
+      <center><form action="{% url 'scope_add' release.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" min="1" 
+        style="width: 353px;margin-left: 18px;" 
+        placeholder="epic details" 
+        name="epic"><br><br>
+
+
+        <textarea name="edesc" 
+        style="resize:none;" id="" cols="50" rows="5" 
+        placeholder="epic-description"></textarea><br><br>
+        
+        
+        <input type="submit" id="btnn1" style="width: 100px;" value="save">
+      </form></center>
+    </div>
+
+  </div>
+
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("btnn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+
+    }
+    </script>
+    
+
+
+
+</body>
+</html>
