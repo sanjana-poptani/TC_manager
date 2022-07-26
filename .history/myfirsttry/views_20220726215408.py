@@ -252,13 +252,10 @@ def edit_scope(request,id,rid):
         return redirect('/')
 
 
-def edit_TC(request,id,tid):
+def edit_TCs(request,id,tid):
     if 'email' in request.session and 'id' in request.session:
         scope = Scope.objects.get(id = id)
-        print("------------------scope-----------------")
-        print(scope)
-        obj = TestCase.objects.filter(scope_id = scope)
-        print(obj)
+        obj = TestCase.objects.get(scope_id = scope)
         testcase = TestCase.objects.get(id = tid)
 
         if request.method == 'POST':
@@ -344,7 +341,7 @@ def edit_TC(request,id,tid):
             testcase.ts_ios = ts_ios
             testcase.ts_android = ts_android
             testcase.ts_automation = ts_automation
-            testcase.tester_portal = tester_portal
+            testcase.tester_portal = ts_portal
             testcase.tester_rm = tester_rm
             testcase.tester_internal = tester_internal
             testcase.tester_be = tester_be
@@ -362,7 +359,7 @@ def edit_TC(request,id,tid):
 
         else:
             users = User.objects.all()
-            return render(request,"release_sheet.html",{'tcs':obj,'users':users,'scope':scope,'editobj':testcase})
+            return render(request,"release_sheet.html",{'tcs':obj,'users':users,'scope':scope,'add':True})
 
 def view_TCs(request,id):
     if 'email' in request.session and 'id' in request.session:

@@ -327,197 +327,9 @@ padding-top: 7px;">Logout</a>
 
           {% if tcs %}
           {% for tc in tcs %}
-
-          {% if editobj.id == tc.id %}
-
-          <form action="{% url 'edit_tc' scope.id tc.id %}" method="post">
-            {% csrf_token %}
-
-            <tr>
-                <td style="width: 10px;">
-                    <!-- <input type="submit" value="💾🔏🛅🔒"> -->
-                    <input type="submit" value="💾">
-                </td>
-                <td style="width: 50px;"><strong>
-                    <input type="text" placeholder="{{ tc.usecase }}" name="usecase" required>
-                </strong></td>
-                <td style="width: 350px;">
-                    <textarea name="steps" id="" cols="30" rows="10" required style="resize: none;"> 
-                        {{ tc.steps }}
-                    </textarea>
-                </td>
-                <td style="width: 350px;">
-                    <textarea name="expected" id="" cols="30" rows="10" required style="resize: none;">
-                        {{ tc.expected_result }}
-                    </textarea>
-                </td>
-                <td style="width: 300px;">
-                    <strong>Portal: 
-                    <select name="ts_portal" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_portal }}</option>
-                        <option value="YTS">YTS</option>
-                        <option value="In_progress">In_progress</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="QA skip">QA Skip</option>
-                        <option value="NA">NA</option>
-                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tester_portal" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_portal.uname }}</option>
-                        {% if users %}
-                        {% for user in users %}
-                        <option value="{{ user.uname }}">{{ user.uname }}</option>
-                        {% endfor %}
-                        {% endif %}
-                        <option value="NA">NA</option>
-                    </select>
-                    <br>
-                    RM: 
-                    <select name="ts_rm" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_rm }}</option>
-                        <option value="YTS">YTS</option>
-                        <option value="In_progress">In_progress</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="QA skip">QA Skip</option>
-                        <option value="NA">NA</option>
-                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tester_rm" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_rm.uname }}</option>
-                        {% if users %}
-                        {% for user in users %}
-                        <option value="{{ user.uname }}">{{ user.uname }}</option>
-                        {% endfor %}
-                        {% endif %}
-                        <option value="NA">NA</option>
-                    </select> <br>
-                    Internal: 
-                    <select name="ts_internal" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_internal }}</option>
-                        <option value="YTS">YTS</option>
-                        <option value="In_progress">In_progress</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="QA skip">QA Skip</option>
-                        <option value="NA">NA</option>
-                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tester_internal" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_internal.uname }}</option>
-                        {% if users %}
-                        {% for user in users %}
-                        <option value="{{ user.uname }}">{{ user.uname }}</option>
-                        {% endfor %}
-                        {% endif %}
-                        <option value="NA">NA</option>
-                    </select><br>
-                    BE: 
-                    <select name="ts_be" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_be }}</option>
-                        <option value="YTS">YTS</option>
-                        <option value="In_progress">In_progress</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="QA skip">QA Skip</option>
-                        <option value="NA">NA</option>
-                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tester_be" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_be.uname }}</option>
-                        {% if users %}
-                        {% for user in users %}
-                        <option value="{{ user.uname }}">{{ user.uname }}</option>
-                        {% endfor %}
-                        {% endif %}
-                        <option value="NA">NA</option>
-                    </select><br>
-                    Ios: 
-                    <select name="ts_ios" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_ios }}</option>
-                        <option value="YTS">YTS</option>
-                        <option value="In_progress">In_progress</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="QA skip">QA Skip</option>
-                        <option value="NA">NA</option>
-                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tester_ios" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_ios.uname }}</option>
-                        {% if users %}
-                        {% for user in users %}
-                        <option value="{{ user.uname }}">{{ user.uname }}</option>
-                        {% endfor %}
-                        {% endif %}
-                        <option value="NA">NA</option>
-                    </select><br>
-                    Android: 
-                    <select name="ts_android" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_android }}</option>
-                        <option value="YTS">YTS</option>
-                        <option value="In_progress">In_progress</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="QA skip">QA Skip</option>
-                        <option value="NA">NA</option>
-                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tester_android" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_android.uname }}</option>
-                        {% if users %}
-                        {% for user in users %}
-                        <option value="{{ user.uname }}">{{ user.uname }}</option>
-                        {% endfor %}
-                        {% endif %}
-                        <option value="NA">NA</option>
-                    </select><br>
-                    Automation: 
-                    <select name="ts_automation" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_automation }}</option>
-                        <option value="YTS">YTS</option>
-                        <option value="In_progress">In_progress</option>
-                        <option value="Pass">Pass</option>
-                        <option value="Fail">Fail</option>
-                        <option value="QA skip">QA Skip</option>
-                        <option value="NA">NA</option>
-                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tester_automation" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_automation.uname }}</option>
-                        {% if users %}
-                        {% for user in users %}
-                        <option value="{{ user.uname }}">{{ user.uname }}</option>
-                        {% endfor %}
-                        {% endif %}
-                        <option value="NA">NA</option>
-                    </select><br></strong>
-                </td>
-                <td style="width: 170px;">
-                    <textarea name="tcmnt" id="" cols="30" rows="10" required style="resize: none;">
-                        {{ tc.tester_comment }}
-                    </textarea>
-                </td>
-                <td style="width: 170px;">
-                    <textarea name="rcmnt" id="" cols="30" rows="10" required style="resize: none;">
-                        {{ tc.reviewer_comment }}
-                    </textarea>
-                </td>
-                <td style="width: 50px;">
-                    <strong>
-                        <select name="tc_author" id="" required>
-                            <option value="" selected disabled>{{ tc.tc_author.uname }}</option>
-                            {% if users %}
-                            {% for user in users %}
-                            <option value="{{ user.uname }}">{{ user.uname }}</option>
-                            {% endfor %}
-                            {% endif %}
-                            <option value="NA">NA</option>
-                        </select>
-                    </strong>
-                </td>
-            </tr>
-
-          </form>
-
-          {% else %}
           <tr>
             <td style="width: 10px;">
-                <a href="{% url 'edit_tc' tc.scope_id.id tc.id %}" style="display: flex; 
+                <a style="display: flex; 
                 justify-content: flex-end;
                 font-size: x-large;
                 flex-wrap: wrap;
@@ -566,7 +378,7 @@ padding-top: 7px;">Logout</a>
                 </select> &nbsp;&nbsp;&nbsp;&nbsp;
                 <select name="" id="" disabled>
                     {% if tc.tester_internal.uname %}
-                    <option value="{{ tc.tester_internal.uname }}">{{ tc.tester_internal.uname }}</option>
+                    <option value="{{ tc.tester_internal.uname }}">{{ tc.tes_internal.uname }}</option>
                     {% else %}
                     <option value="NA">NA</option>
                     {% endif %}
@@ -632,7 +444,6 @@ padding-top: 7px;">Logout</a>
                 </select> </strong>
             </td>
           </tr>
-          {% endif %}
           {% endfor %}
           {% endif %}
           

@@ -328,7 +328,7 @@ padding-top: 7px;">Logout</a>
           {% if tcs %}
           {% for tc in tcs %}
 
-          {% if editobj.id == tc.id %}
+          {% if editobj %}
 
           <form action="{% url 'edit_tc' scope.id tc.id %}" method="post">
             {% csrf_token %}
@@ -354,7 +354,7 @@ padding-top: 7px;">Logout</a>
                 <td style="width: 300px;">
                     <strong>Portal: 
                     <select name="ts_portal" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_portal }}</option>
+                        <option value="" selected disabled>{{ }}</option>
                         <option value="YTS">YTS</option>
                         <option value="In_progress">In_progress</option>
                         <option value="Pass">Pass</option>
@@ -363,7 +363,7 @@ padding-top: 7px;">Logout</a>
                         <option value="NA">NA</option>
                     </select>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tester_portal" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_portal.uname }}</option>
+                        <option value="" selected >Tester</option>
                         {% if users %}
                         {% for user in users %}
                         <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -374,7 +374,6 @@ padding-top: 7px;">Logout</a>
                     <br>
                     RM: 
                     <select name="ts_rm" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_rm }}</option>
                         <option value="YTS">YTS</option>
                         <option value="In_progress">In_progress</option>
                         <option value="Pass">Pass</option>
@@ -383,7 +382,7 @@ padding-top: 7px;">Logout</a>
                         <option value="NA">NA</option>
                     </select>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tester_rm" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_rm.uname }}</option>
+                        <option value="" selected disabled>Tester</option>
                         {% if users %}
                         {% for user in users %}
                         <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -393,7 +392,6 @@ padding-top: 7px;">Logout</a>
                     </select> <br>
                     Internal: 
                     <select name="ts_internal" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_internal }}</option>
                         <option value="YTS">YTS</option>
                         <option value="In_progress">In_progress</option>
                         <option value="Pass">Pass</option>
@@ -402,7 +400,7 @@ padding-top: 7px;">Logout</a>
                         <option value="NA">NA</option>
                     </select>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tester_internal" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_internal.uname }}</option>
+                        <option value="" selected disabled>Tester</option>
                         {% if users %}
                         {% for user in users %}
                         <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -412,7 +410,6 @@ padding-top: 7px;">Logout</a>
                     </select><br>
                     BE: 
                     <select name="ts_be" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_be }}</option>
                         <option value="YTS">YTS</option>
                         <option value="In_progress">In_progress</option>
                         <option value="Pass">Pass</option>
@@ -421,7 +418,7 @@ padding-top: 7px;">Logout</a>
                         <option value="NA">NA</option>
                     </select>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tester_be" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_be.uname }}</option>
+                        <option value="" selected disabled>Tester</option>
                         {% if users %}
                         {% for user in users %}
                         <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -431,7 +428,6 @@ padding-top: 7px;">Logout</a>
                     </select><br>
                     Ios: 
                     <select name="ts_ios" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_ios }}</option>
                         <option value="YTS">YTS</option>
                         <option value="In_progress">In_progress</option>
                         <option value="Pass">Pass</option>
@@ -440,7 +436,7 @@ padding-top: 7px;">Logout</a>
                         <option value="NA">NA</option>
                     </select>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tester_ios" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_ios.uname }}</option>
+                        <option value="" selected disabled>Tester</option>
                         {% if users %}
                         {% for user in users %}
                         <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -450,7 +446,6 @@ padding-top: 7px;">Logout</a>
                     </select><br>
                     Android: 
                     <select name="ts_android" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_android }}</option>
                         <option value="YTS">YTS</option>
                         <option value="In_progress">In_progress</option>
                         <option value="Pass">Pass</option>
@@ -459,7 +454,7 @@ padding-top: 7px;">Logout</a>
                         <option value="NA">NA</option>
                     </select>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tester_android" id="" required>
-                        <option value="" selected disabled>{{ tc.tester_android.uname }}</option>
+                        <option value="" selected disabled>Tester</option>
                         {% if users %}
                         {% for user in users %}
                         <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -469,7 +464,6 @@ padding-top: 7px;">Logout</a>
                     </select><br>
                     Automation: 
                     <select name="ts_automation" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_automation }}</option>
                         <option value="YTS">YTS</option>
                         <option value="In_progress">In_progress</option>
                         <option value="Pass">Pass</option>
@@ -478,7 +472,7 @@ padding-top: 7px;">Logout</a>
                         <option value="NA">NA</option>
                     </select>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tester_automation" id="" required>
-                        <option value="" selected disabled>{{ tc.ts_automation.uname }}</option>
+                        <option value="" selected disabled>Tester</option>
                         {% if users %}
                         {% for user in users %}
                         <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -489,18 +483,18 @@ padding-top: 7px;">Logout</a>
                 </td>
                 <td style="width: 170px;">
                     <textarea name="tcmnt" id="" cols="30" rows="10" required style="resize: none;">
-                        {{ tc.tester_comment }}
+                        Tester's comment
                     </textarea>
                 </td>
                 <td style="width: 170px;">
                     <textarea name="rcmnt" id="" cols="30" rows="10" required style="resize: none;">
-                        {{ tc.reviewer_comment }}
+                        Reviewer's comment
                     </textarea>
                 </td>
                 <td style="width: 50px;">
                     <strong>
                         <select name="tc_author" id="" required>
-                            <option value="" selected disabled>{{ tc.tc_author.uname }}</option>
+                            <option value="" selected disabled>Tester</option>
                             {% if users %}
                             {% for user in users %}
                             <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -517,7 +511,7 @@ padding-top: 7px;">Logout</a>
           {% else %}
           <tr>
             <td style="width: 10px;">
-                <a href="{% url 'edit_tc' tc.scope_id.id tc.id %}" style="display: flex; 
+                <a style="display: flex; 
                 justify-content: flex-end;
                 font-size: x-large;
                 flex-wrap: wrap;

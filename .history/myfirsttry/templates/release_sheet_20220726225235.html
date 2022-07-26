@@ -328,7 +328,7 @@ padding-top: 7px;">Logout</a>
           {% if tcs %}
           {% for tc in tcs %}
 
-          {% if editobj.id == tc.id %}
+          {% if editobj %}
 
           <form action="{% url 'edit_tc' scope.id tc.id %}" method="post">
             {% csrf_token %}

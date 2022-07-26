@@ -255,10 +255,8 @@ def edit_scope(request,id,rid):
 def edit_TC(request,id,tid):
     if 'email' in request.session and 'id' in request.session:
         scope = Scope.objects.get(id = id)
-        print("------------------scope-----------------")
-        print(scope)
-        obj = TestCase.objects.filter(scope_id = scope)
-        print(obj)
+        print()
+        obj = TestCase.objects.get(scope_id = scope)
         testcase = TestCase.objects.get(id = tid)
 
         if request.method == 'POST':
@@ -344,7 +342,7 @@ def edit_TC(request,id,tid):
             testcase.ts_ios = ts_ios
             testcase.ts_android = ts_android
             testcase.ts_automation = ts_automation
-            testcase.tester_portal = tester_portal
+            testcase.tester_portal = ts_portal
             testcase.tester_rm = tester_rm
             testcase.tester_internal = tester_internal
             testcase.tester_be = tester_be

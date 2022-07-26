@@ -328,7 +328,7 @@ padding-top: 7px;">Logout</a>
           {% if tcs %}
           {% for tc in tcs %}
 
-          {% if editobj.id == tc.id %}
+          {% if editobj %}
 
           <form action="{% url 'edit_tc' scope.id tc.id %}" method="post">
             {% csrf_token %}
@@ -500,7 +500,7 @@ padding-top: 7px;">Logout</a>
                 <td style="width: 50px;">
                     <strong>
                         <select name="tc_author" id="" required>
-                            <option value="" selected disabled>{{ tc.tc_author.uname }}</option>
+                            <option value="" selected disabled>{{Tester}}</option>
                             {% if users %}
                             {% for user in users %}
                             <option value="{{ user.uname }}">{{ user.uname }}</option>
@@ -517,7 +517,7 @@ padding-top: 7px;">Logout</a>
           {% else %}
           <tr>
             <td style="width: 10px;">
-                <a href="{% url 'edit_tc' tc.scope_id.id tc.id %}" style="display: flex; 
+                <a style="display: flex; 
                 justify-content: flex-end;
                 font-size: x-large;
                 flex-wrap: wrap;

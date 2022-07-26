@@ -1,5 +1,4 @@
 from audioop import reverse
-from cgi import test
 from curses.ascii import US
 from enum import unique
 from http.client import HTTPResponse
@@ -252,117 +251,10 @@ def edit_scope(request,id,rid):
         return redirect('/')
 
 
-def edit_TC(request,id,tid):
+def edit_TCs(request,id,tid):
     if 'email' in request.session and 'id' in request.session:
         scope = Scope.objects.get(id = id)
-        print("------------------scope-----------------")
-        print(scope)
-        obj = TestCase.objects.filter(scope_id = scope)
-        print(obj)
-        testcase = TestCase.objects.get(id = tid)
-
-        if request.method == 'POST':
-            ucase = request.POST.get('usecase')
-            steps = request.POST.get('steps')
-            eresult = request.POST.get('expected')
-            ts_portal = request.POST.get('ts_portal')
-            tester_portal = request.POST.get('tester_portal')
-            ts_rm = request.POST.get('ts_rm')
-            tester_rm = request.POST.get('tester_rm')
-            ts_internal = request.POST.get('ts_internal')
-            tester_internal = request.POST.get('tester_internal')
-            ts_be = request.POST.get('ts_be')
-            tester_be = request.POST.get('tester_internal')
-            ts_ios = request.POST.get('ts_ios')
-            tester_ios = request.POST.get('tester_ios')
-            ts_android = request.POST.get('ts_android')
-            tester_android = request.POST.get('tester_android')
-            ts_automation = request.POST.get('ts_automation')
-            tester_automation = request.POST.get('tester_automation')
-            tester_comment = request.POST.get('tcmnt')
-            reviewer_comment = request.POST.get('rcmnt')
-            tc_author = request.POST.get('tc_author')
-
-            if tester_portal == "NA":
-                tester_portal = None
-            else:
-                tester_portal = User.objects.get(uname = tester_portal)
-
-                
-            if tester_rm == "NA":
-                print("---------------- reached here -------------")
-                tester_rm = None
-            else:
-                print("------------------ in else------------------- "+ tester_rm)
-                tester_rm = User.objects.get(uname = tester_rm)
-
-                
-            if tester_internal == "NA":
-                print("---------------came in if--------" + str(tester_internal))
-                tester_internal = None
-            else:
-                print("---------got tester " + str(tester_internal))
-                tester_internal = User.objects.get(uname = tester_internal)
-
-                
-            if tester_be == "NA":
-                tester_be = None
-            else:
-                tester_be = User.objects.get(uname = tester_be)
-
-                
-            if tester_ios == "NA":
-                tester_ios = None
-            else:
-                tester_ios = User.objects.get(uname = tester_ios)
-
-                
-            if tester_android == "NA":
-                tester_android = None
-            else:
-                tester_android = User.objects.get(uname = tester_android)
-
-                
-            if tester_automation == "NA":
-                tester_automation = None
-            else:
-                tester_automation = User.objects.get(uname = tester_automation)
-
-            if tc_author == "NA":
-                tc_author = None
-            else:
-                tc_author = User.objects.get(uname = tc_author)
-
-
-            testcase.usecase = ucase
-            testcase.steps = steps
-            testcase.expected_result = eresult
-            testcase.ts_portal = ts_portal
-            testcase.ts_rm = ts_rm
-            testcase.ts_internal = ts_internal
-            testcase.ts_be = ts_be
-            testcase.ts_ios = ts_ios
-            testcase.ts_android = ts_android
-            testcase.ts_automation = ts_automation
-            testcase.tester_portal = tester_portal
-            testcase.tester_rm = tester_rm
-            testcase.tester_internal = tester_internal
-            testcase.tester_be = tester_be
-            testcase.tester_ios = tester_ios
-            testcase.tester_android = tester_android
-            testcase.tester_automation = tester_automation
-            testcase.tester_comment = tester_comment
-            testcase.reviewer_comment = reviewer_comment
-            testcase.tc_author = tc_author
-            testcase.scope_id = scope
-
-            testcase.save()
-
-            return redirect("/view_tcs/" + str(id))
-
-        else:
-            users = User.objects.all()
-            return render(request,"release_sheet.html",{'tcs':obj,'users':users,'scope':scope,'editobj':testcase})
+        obj = TestCase.objects
 
 def view_TCs(request,id):
     if 'email' in request.session and 'id' in request.session:

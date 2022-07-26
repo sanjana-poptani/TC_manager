@@ -1,5 +1,4 @@
 from audioop import reverse
-from cgi import test
 from curses.ascii import US
 from enum import unique
 from http.client import HTTPResponse
@@ -252,13 +251,10 @@ def edit_scope(request,id,rid):
         return redirect('/')
 
 
-def edit_TC(request,id,tid):
+def edit_TCs(request,id,tid):
     if 'email' in request.session and 'id' in request.session:
         scope = Scope.objects.get(id = id)
-        print("------------------scope-----------------")
-        print(scope)
-        obj = TestCase.objects.filter(scope_id = scope)
-        print(obj)
+        obj = TestCase.objects.get(scope_id = scope)
         testcase = TestCase.objects.get(id = tid)
 
         if request.method == 'POST':
@@ -337,32 +333,27 @@ def edit_TC(request,id,tid):
             testcase.usecase = ucase
             testcase.steps = steps
             testcase.expected_result = eresult
-            testcase.ts_portal = ts_portal
-            testcase.ts_rm = ts_rm
-            testcase.ts_internal = ts_internal
-            testcase.ts_be = ts_be
-            testcase.ts_ios = ts_ios
-            testcase.ts_android = ts_android
-            testcase.ts_automation = ts_automation
-            testcase.tester_portal = tester_portal
-            testcase.tester_rm = tester_rm
-            testcase.tester_internal = tester_internal
-            testcase.tester_be = tester_be
-            testcase.tester_ios = tester_ios
-            testcase.tester_android = tester_android
-            testcase.tester_automation = tester_automation
-            testcase.tester_comment = tester_comment
-            testcase.reviewer_comment = reviewer_comment
-            testcase.tc_author = tc_author
-            testcase.scope_id = scope
+            
+            new_obj = TestCase.objects.create(usecase = ucase,steps = steps,expected_result = eresult,
+            ts_portal = ts_portal,ts_rm = ts_rm,ts_internal = ts_internal,
+            ts_be = ts_be,ts_ios = ts_ios,ts_android = ts_android,
+            ts_automation = ts_automation,
+            tester_portal = tester_portal,
+            tester_rm = tester_rm,
+            tester_internal = tester_internal,
+            tester_be = tester_be,
+            tester_ios = tester_ios,
+            tester_android = tester_android,
+            tester_automation = tester_automation,
+            tester_comment = tester_comment,
+            reviewer_comment = reviewer_comment,
+            tc_author = tc_author,
+            scope_id = scope
+            )
 
-            testcase.save()
+            new_obj.save()
 
             return redirect("/view_tcs/" + str(id))
-
-        else:
-            users = User.objects.all()
-            return render(request,"release_sheet.html",{'tcs':obj,'users':users,'scope':scope,'editobj':testcase})
 
 def view_TCs(request,id):
     if 'email' in request.session and 'id' in request.session:

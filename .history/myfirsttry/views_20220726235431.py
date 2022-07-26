@@ -344,7 +344,7 @@ def edit_TC(request,id,tid):
             testcase.ts_ios = ts_ios
             testcase.ts_android = ts_android
             testcase.ts_automation = ts_automation
-            testcase.tester_portal = tester_portal
+            testcase.tester_portal = ts_portal
             testcase.tester_rm = tester_rm
             testcase.tester_internal = tester_internal
             testcase.tester_be = tester_be
