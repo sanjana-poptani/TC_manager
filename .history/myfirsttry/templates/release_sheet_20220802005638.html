@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
+    <link rel="icon" type="image/x-icon" href="{% static '/images/tc_icon.ico' %}">
+    <title>Testcase_manager</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/release_sheet_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script type="text/javascript">
+        function changeImg() {
+            document.body.style.backgroundImage = 'url(https://source.unsplash.com/1600x800/?nature,forest,flower,fish,sky,desert)';
+        }
+        window.onload = changeImg;
+    </script> -->
+
+</head>
+
+
+<body background="{% static '/images/image.png' %}" style="background-size: cover;">
+
+    
+  <a href="{% url 'release_scope' scope.release_id.id %}" id="btnn1" style="width: 10%;
+  margin-left: 15px;
+  text-decoration: none;
+  text-align:center;
+  float: left;
+  padding-top: 7px;">Back</a>
+
+
+<center>
+    <a href="{% url 'show_chart' scope.id %}" id="btnn" style="float: left;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 7px;
+    height: 38px;
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    width: 200px;">Show Charts</a>
+</center>
+
+<form action="{% url 'add_tc' scope.id %}" method="get">
+    {% csrf_token %}
+<button id="btnn1" type="submit" style="float: right;margin-right: 15px;">+</button>
+</form>
+
+<a href="{% url 'logout' %}" id="btnn1" style="width: 10%;
+margin-right: 20px;
+text-decoration: none;
+text-align:center;
+float: right;
+padding-top: 7px;">Logout</a>
+
+<br><br>
+    
+    <table>
+        <thead>
+            <tr>
+                {% if title %}
+                <th colspan="8" style="text-align:center;">Epic Link: <a href="" style="color: #EDEDED;">{{ title.scope_id.epic }}</a></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th colspan="8">
+
+
+                    <!-- adding and editing title of tc -->
+                    {% if title %}
+                    <span style="float: left;margin-left:10px;">
+                    {{ title.title }} 
+                    </span>
+                    <span style="float: left;margin-left:20px;">
+                    {{ title.tc_author }} 
+                    </span>
+                    <a style="display: flex; 
+                    justify-content: flex-end;
+                    font-size: larger;
+                    float: left;
+                    flex-wrap: wrap;
+                    margin-left: 10px;
+                    cursor: pointer;
+                    color: lightgrey;
+                    text-decoration: none;
+                    z-index: 3;">✎</a>
+
+
+                    {% elif add_title %}
+                    <form action="{% url 'add_details' scope.id %}" style="float: left;z-index: 6;" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="title" style="height: 20px;" required placeholder="Add your testcase's title" />
+                        <input type="text" name="author" style="height: 20px;" required placeholder="Testcase's author">
+                        <input type="submit" value="save" style="height: 25px;">
+                    </form>
+
+                    {% else %}
+                    <form action="{% url 'add_details' scope.id %}" method="get">
+                        {% csrf_token %}
+                        <input type="submit" value="Add Main Details" style="float: left;margin-left:10px;height: 30px;">
+                    </form>
+                    {% endif %}
+
+                    
+                    <!-- applying filters -->
+                    <form action="{% url 'filter_tc' scope.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" style="font-size:11.5px;
+                        float: right;
+                        height: 30px;
+                        z-index: 6;
+                        cursor: pointer;"><i class="fa fa-search"></i></button>
+                        
+                        {% if filter %}
+
+
+
+                        <select name="testcase" id="" style="float: right;
+                        height:30px;
+                        z-index:6;
+                        position: relative;
+                        margin-right: 10px;" >
+                            <option value="{{ ts }}" selected>{{ ts }}</option>
+                            <option value="YTS">YTS</option>
+                            <option value="In_progress">In Progress</option>
+                            <option value="Pass">Pass</option>
+                            <option value="Fail">Fail</option>
+                            <option value="QA_Skip">QA Skip</option>
+                            <option value="NA">NA</option>
+                        </select>
+                        <select name="tester" id="" style="float: right;
+                        height:30px;
+                        z-index:6;
+                        position: relative;
+                        margin-right: 10px;" >
+                            <option value="{{ tester }}" selected>{{ tester }}</option>
+                            {% if users %}
+                            {% for user in users %}
+                            <option value="{{ user.uname }}">{{ user.uname }}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+
+                        <button style="float: right;
+                        height: 30px;
+                        z-index: 6;
+                        position: relative;
+                        margin-right: 10px;"> 
+                            <a href="{% url 'view_tcs' scope.id %}" 
+                            style="text-decoration: none;color: black;"> 
+                                Clear Filters 
+                            </a>
+                        </button>
+
+                        {% else %}
+
+                        <select name="testcase" id="" style="float: right;
+                        height:30px;
+                        z-index:6;
+                        position: relative;
+                        margin-right: 20px;" required>
+                            <option value="" selected disabled>Test Case</option>
+                            <option value="YTS">YTS</option>
+                            <option value="In_progress">In Progress</option>
+                            <option value="Pass">Pass</option>
+                            <option value="Fail">Fail</option>
+                            <option value="QA_Skip">QA Skip</option>
+                            <option value="NA">NA</option>
+                        </select>
+                        <select name="tester" id="" style="float: right;
+                        height:30px;
+                        z-index:6;
+                        position: relative;
+                        margin-right: 10px;" required>
+                            <option value="" selected disabled>Tester</option>
+                            {% if users %}
+                            {% for user in users %}
+                            <option value="{{ user.uname }}">{{ user.uname }}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+
+                        {% endif %}
+
+                    </form>
+                    
+                </th>
+                <!-- filters applied  -->
+            </tr>
+        </thead>
+        <thead>
+          <tr>
+
+            <!-- col headers  -->
+
+            <th style="width: 10px;">Edit - Delete - Save</th>
+            <th style="width: 50px;">Use Case</th>
+            <th style="width: 350px;">Steps to execute</th>
+            <th style="width: 350px;">Expected Result</th>
+            <th style="width: 300px;">Test Status - Assignee</th>
+            <th style="width: 170px;">Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <!-- main rows data fetching from backend -->
+          {% if tcs %}
+          {% for tc in tcs %}
+
+
+
+          <!-- to check if filters applied  -->
+            {% if filter %}
+                {% if tc.tester_portal.uname == tester and tc.ts_portal == ts or tc.tester_rm.uname == tester and tc.ts_rm == ts or tc.tester_internal.uname == tester and tc.ts_internal == ts or tc.tester_be.uname == tester and tc.ts_be == ts or tc.tester_ios.uname == tester and tc.ts_ios == ts or tc.tester_android.uname == tester and tc.ts_android == ts or tc.tester_automation.uname == tester and tc.ts_automation == ts %}
+                    <tr>
+                    <td style="width: 10px;"> - </td>
+                    <td style="width: 50px;"><strong>{{ tc.usecase }}</strong></td>
+                    <td style="width: 350px;"><pre>{{ tc.steps }} </pre></td>
+                    <td style="width: 350px;"><pre>{{ tc.expected_result }}</pre></td>
+                    <td style="width: 300px;">
+                        {% if tc.tester_portal.uname == tester and tc.ts_portal == ts %}        
+                        <strong>Portal: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_portal }}">{{ tc.ts_portal }}</option>
+                        </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_portal.uname %}
+                            <option value="{{ tc.tester_portal.uname }}">{{ tc.tester_portal.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select>
+                        <br>
+                        {% endif %}
+
+                        {% if tc.tester_rm.uname == tester and tc.ts_rm == ts %}        
+                        RM: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_rm }}">{{ tc.ts_rm }}</option>
+                        </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_rm.uname %}
+                            <option value="{{ tc.tester_rm.uname }}">{{ tc.tester_rm.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select> <br>
+                        {% endif %}
+
+                        {% if tc.tester_internal.uname == tester and tc.ts_internal == ts %}        
+                        Internal: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_internal }}">{{ tc.ts_internal }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_internal.uname %}
+                            <option value="{{ tc.tester_internal.uname }}">{{ tc.tester_internal.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        {% endif %}
+                        
+                        {% if tc.tester_be.uname == tester and tc.ts_be == ts %}        
+                        BE: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_be }}">{{ tc.ts_be }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_be.uname %}
+                            <option value="{{ tc.tester_be.uname }}">{{ tc.tester_be.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        {% endif %}
+                        
+                        {% if tc.tester_ios.uname == tester and tc.ts_ios == ts %}        
+                        Ios: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_ios }}">{{ tc.ts_ios }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_ios.uname %}
+                            <option value="{{ tc.tester_ios.uname }}">{{ tc.tester_ios.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        {% endif %}
+                        
+                        {% if tc.tester_android.uname == tester and tc.ts_android == ts %}        
+                        Android: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_android }}">{{ tc.ts_android }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_android.uname %}
+                            <option value="{{ tc.tester_android.uname }}">{{ tc.tester_android.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        {% endif %}
+                        
+                        {% if tc.tester_automation.uname == tester and tc.ts_automation == ts %}        
+                        Automation: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_automation }}">{{ tc.ts_automation }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_automation.uname %}
+                            <option value="{{ tc.tester_automation.uname }}">{{ tc.tester_automation.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        {% endif %}
+                    </strong>
+                    
+                    </td>
+                    <td style="width: 170px;">
+                    <pre>{{ tc.comment }}</pre> 
+                    </td>
+                </tr>
+            {% endif %}
+            
+        {% else %}
+            <!-- filter not applied -->
+
+                <!-- if editing required -->
+                {% if editobj.id == tc.id %}
+
+                <form action="{% url 'edit_tc' tc.title_id.scope_id.id tc.id %}" method="post">
+                    {% csrf_token %}
+
+                    <tr>
+                        <td style="width: 10px;">
+                            <!-- <input type="submit" value="💾🔏🛅🔒"> -->
+                            <input type="submit" value="💾">
+                        </td>
+                        <td style="width: 50px;"><strong>
+                            <input type="text" placeholder="{{ tc.usecase }}" name="usecase" required>
+                        </strong></td>
+                        <td style="width: 350px;">
+                            <textarea name="steps" id="" cols="30" rows="10" required style="resize: none;"> 
+                                {{ tc.steps }}
+                            </textarea>
+                        </td>
+                        <td style="width: 350px;">
+                            <textarea name="expected" id="" cols="30" rows="10" required style="resize: none;">
+                                {{ tc.expected_result }}
+                            </textarea>
+                        </td>
+                        <td style="width: 300px;">
+                            <strong>Portal: 
+                            <select name="ts_portal" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_portal }}</option>
+                                <option value="YTS">YTS</option>
+                                <option value="In_progress">In_progress</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="QA skip">QA Skip</option>
+                                <option value="NA">NA</option>
+                            </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="tester_portal" id="" required>
+                                <option value="" selected disabled>{{ tc.tester_portal.uname }}</option>
+                                {% if users %}
+                                {% for user in users %}
+                                <option value="{{ user.uname }}">{{ user.uname }}</option>
+                                {% endfor %}
+                                {% endif %}
+                                <option value="NA">NA</option>
+                            </select>
+                            <br>
+                            RM: 
+                            <select name="ts_rm" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_rm }}</option>
+                                <option value="YTS">YTS</option>
+                                <option value="In_progress">In_progress</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="QA skip">QA Skip</option>
+                                <option value="NA">NA</option>
+                            </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="tester_rm" id="" required>
+                                <option value="" selected disabled>{{ tc.tester_rm.uname }}</option>
+                                {% if users %}
+                                {% for user in users %}
+                                <option value="{{ user.uname }}">{{ user.uname }}</option>
+                                {% endfor %}
+                                {% endif %}
+                                <option value="NA">NA</option>
+                            </select> <br>
+                            Internal: 
+                            <select name="ts_internal" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_internal }}</option>
+                                <option value="YTS">YTS</option>
+                                <option value="In_progress">In_progress</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="QA skip">QA Skip</option>
+                                <option value="NA">NA</option>
+                            </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="tester_internal" id="" required>
+                                <option value="" selected disabled>{{ tc.tester_internal.uname }}</option>
+                                {% if users %}
+                                {% for user in users %}
+                                <option value="{{ user.uname }}">{{ user.uname }}</option>
+                                {% endfor %}
+                                {% endif %}
+                                <option value="NA">NA</option>
+                            </select><br>
+                            BE: 
+                            <select name="ts_be" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_be }}</option>
+                                <option value="YTS">YTS</option>
+                                <option value="In_progress">In_progress</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="QA skip">QA Skip</option>
+                                <option value="NA">NA</option>
+                            </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="tester_be" id="" required>
+                                <option value="" selected disabled>{{ tc.tester_be.uname }}</option>
+                                {% if users %}
+                                {% for user in users %}
+                                <option value="{{ user.uname }}">{{ user.uname }}</option>
+                                {% endfor %}
+                                {% endif %}
+                                <option value="NA">NA</option>
+                            </select><br>
+                            Ios: 
+                            <select name="ts_ios" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_ios }}</option>
+                                <option value="YTS">YTS</option>
+                                <option value="In_progress">In_progress</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="QA skip">QA Skip</option>
+                                <option value="NA">NA</option>
+                            </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="tester_ios" id="" required>
+                                <option value="" selected disabled>{{ tc.tester_ios.uname }}</option>
+                                {% if users %}
+                                {% for user in users %}
+                                <option value="{{ user.uname }}">{{ user.uname }}</option>
+                                {% endfor %}
+                                {% endif %}
+                                <option value="NA">NA</option>
+                            </select><br>
+                            Android: 
+                            <select name="ts_android" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_android }}</option>
+                                <option value="YTS">YTS</option>
+                                <option value="In_progress">In_progress</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="QA skip">QA Skip</option>
+                                <option value="NA">NA</option>
+                            </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="tester_android" id="" required>
+                                <option value="" selected disabled>{{ tc.tester_android.uname }}</option>
+                                {% if users %}
+                                {% for user in users %}
+                                <option value="{{ user.uname }}">{{ user.uname }}</option>
+                                {% endfor %}
+                                {% endif %}
+                                <option value="NA">NA</option>
+                            </select><br>
+                            Automation: 
+                            <select name="ts_automation" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_automation }}</option>
+                                <option value="YTS">YTS</option>
+                                <option value="In_progress">In_progress</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="QA skip">QA Skip</option>
+                                <option value="NA">NA</option>
+                            </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="tester_automation" id="" required>
+                                <option value="" selected disabled>{{ tc.ts_automation.uname }}</option>
+                                {% if users %}
+                                {% for user in users %}
+                                <option value="{{ user.uname }}">{{ user.uname }}</option>
+                                {% endfor %}
+                                {% endif %}
+                                <option value="NA">NA</option>
+                            </select><br></strong>
+                        </td>
+                        <td style="width: 170px;">
+                            <textarea name="rcmnt" id="" cols="30" rows="10" required style="resize: none;">
+                                {{ tc.comment }}
+                            </textarea>
+                        </td>
+                    </tr>
+                </form>
+
+                {% else %}
+
+                <!-- to view the data  -->
+                <tr>
+                    <td style="width: 10px;">
+                        <a href="{% url 'edit_tc' tc.title_id.scope_id.id tc.id %}" style="display: flex; 
+                        justify-content: flex-end;
+                        font-size: x-large;
+                        flex-wrap: wrap;
+                        cursor: pointer;
+                        color: #696969;
+                        text-decoration: none;
+                        z-index: 3;">✎</a><br>
+                        <a href="{% url 'del_tcs' tc.id %}" style="display: flex; 
+                        justify-content: flex-end;
+                        font-size: xx-large;
+                        flex-wrap: wrap;
+                        color: #696969;
+                        cursor: pointer;
+                        text-decoration: none;">🗑</a>
+                    </td>
+                    <td style="width: 50px;"><strong>{{ tc.usecase }}</strong></td>
+                    <td style="width: 350px;"><pre>{{ tc.steps }} </pre></td>
+                    <td style="width: 350px;"><pre>{{ tc.expected_result }}</pre></td>
+                    <td style="width: 300px;">
+                        <strong>Portal: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_portal }}">{{ tc.ts_portal }}</option>
+                        </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_portal.uname %}
+                            <option value="{{ tc.tester_portal.uname }}">{{ tc.tester_portal.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select>
+                        <br>
+                        RM: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_rm }}">{{ tc.ts_rm }}</option>
+                        </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_rm.uname %}
+                            <option value="{{ tc.tester_rm.uname }}">{{ tc.tester_rm.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select> <br>
+                        Internal: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_internal }}">{{ tc.ts_internal }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_internal.uname %}
+                            <option value="{{ tc.tester_internal.uname }}">{{ tc.tester_internal.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        BE: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_be }}">{{ tc.ts_be }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_be.uname %}
+                            <option value="{{ tc.tester_be.uname }}">{{ tc.tester_be.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        Ios: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_ios }}">{{ tc.ts_ios }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_ios.uname %}
+                            <option value="{{ tc.tester_ios.uname }}">{{ tc.tester_ios.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        Android: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_android }}">{{ tc.ts_android }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_android.uname %}
+                            <option value="{{ tc.tester_android.uname }}">{{ tc.tester_android.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br>
+                        Automation: 
+                        <select name="" id="" disabled>
+                            <option value="{{ tc.ts_automation }}">{{ tc.ts_automation }}</option>
+                        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="" id="" disabled>
+                            {% if tc.tester_automation.uname %}
+                            <option value="{{ tc.tester_automation.uname }}">{{ tc.tester_automation.uname }}</option>
+                            {% else %}
+                            <option value="NA">NA</option>
+                            {% endif %}
+                        </select><br></strong>
+                    </td>
+                    <td style="width: 170px;">
+                    <pre>{{ tc.comment }} </pre>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% endif %}
+          <!-- data fetching ended, will show requried rows using for loop -->
+          
+
+
+          <!-- if we want to add new row data  -->
+          {% if add %}
+          <form action="{% url 'add_tc' scope.id %}" method="post">
+            {% csrf_token %}
+
+            <tr>
+                <td style="width: 10px;">
+                    <!-- <input type="submit" value="💾🔏🛅🔒"> -->
+                    <input type="submit" value="💾">
+                </td>
+                <td style="width: 50px;"><strong>
+                    <input type="text" placeholder="usecase" name="usecase" required>
+                </strong></td>
+                <td style="width: 350px;">
+                    <textarea name="steps" id="" cols="30" rows="10" required style="resize: none;"> 
+                        Steps to execute 
+                    </textarea>
+                </td>
+                <td style="width: 350px;">
+                    <textarea name="expected" id="" cols="30" rows="10" required style="resize: none;">
+                        expected results
+                    </textarea>
+                </td>
+                <td style="width: 300px;">
+                    <strong>Portal: 
+                    <select name="ts_portal" id="" required>
+                        <option value="YTS">YTS</option>
+                        <option value="In_progress">In_progress</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                        <option value="QA skip">QA Skip</option>
+                        <option value="NA">NA</option>
+                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="tester_portal" id="" required>
+                        <option value="" selected >Tester</option>
+                        {% if users %}
+                        {% for user in users %}
+                        <option value="{{ user.uname }}">{{ user.uname }}</option>
+                        {% endfor %}
+                        {% endif %}
+                        <option value="NA">NA</option>
+                    </select>
+                    <br>
+                    RM: 
+                    <select name="ts_rm" id="" required>
+                        <option value="YTS">YTS</option>
+                        <option value="In_progress">In_progress</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                        <option value="QA skip">QA Skip</option>
+                        <option value="NA">NA</option>
+                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="tester_rm" id="" required>
+                        <option value="" selected disabled>Tester</option>
+                        {% if users %}
+                        {% for user in users %}
+                        <option value="{{ user.uname }}">{{ user.uname }}</option>
+                        {% endfor %}
+                        {% endif %}
+                        <option value="NA">NA</option>
+                    </select> <br>
+                    Internal: 
+                    <select name="ts_internal" id="" required>
+                        <option value="YTS">YTS</option>
+                        <option value="In_progress">In_progress</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                        <option value="QA skip">QA Skip</option>
+                        <option value="NA">NA</option>
+                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="tester_internal" id="" required>
+                        <option value="" selected disabled>Tester</option>
+                        {% if users %}
+                        {% for user in users %}
+                        <option value="{{ user.uname }}">{{ user.uname }}</option>
+                        {% endfor %}
+                        {% endif %}
+                        <option value="NA">NA</option>
+                    </select><br>
+                    BE: 
+                    <select name="ts_be" id="" required>
+                        <option value="YTS">YTS</option>
+                        <option value="In_progress">In_progress</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                        <option value="QA skip">QA Skip</option>
+                        <option value="NA">NA</option>
+                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="tester_be" id="" required>
+                        <option value="" selected disabled>Tester</option>
+                        {% if users %}
+                        {% for user in users %}
+                        <option value="{{ user.uname }}">{{ user.uname }}</option>
+                        {% endfor %}
+                        {% endif %}
+                        <option value="NA">NA</option>
+                    </select><br>
+                    Ios: 
+                    <select name="ts_ios" id="" required>
+                        <option value="YTS">YTS</option>
+                        <option value="In_progress">In_progress</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                        <option value="QA skip">QA Skip</option>
+                        <option value="NA">NA</option>
+                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="tester_ios" id="" required>
+                        <option value="" selected disabled>Tester</option>
+                        {% if users %}
+                        {% for user in users %}
+                        <option value="{{ user.uname }}">{{ user.uname }}</option>
+                        {% endfor %}
+                        {% endif %}
+                        <option value="NA">NA</option>
+                    </select><br>
+                    Android: 
+                    <select name="ts_android" id="" required>
+                        <option value="YTS">YTS</option>
+                        <option value="In_progress">In_progress</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                        <option value="QA skip">QA Skip</option>
+                        <option value="NA">NA</option>
+                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="tester_android" id="" required>
+                        <option value="" selected disabled>Tester</option>
+                        {% if users %}
+                        {% for user in users %}
+                        <option value="{{ user.uname }}">{{ user.uname }}</option>
+                        {% endfor %}
+                        {% endif %}
+                        <option value="NA">NA</option>
+                    </select><br>
+                    Automation: 
+                    <select name="ts_automation" id="" required>
+                        <option value="YTS">YTS</option>
+                        <option value="In_progress">In_progress</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                        <option value="QA skip">QA Skip</option>
+                        <option value="NA">NA</option>
+                    </select>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="tester_automation" id="" required>
+                        <option value="" selected disabled>Tester</option>
+                        {% if users %}
+                        {% for user in users %}
+                        <option value="{{ user.uname }}">{{ user.uname }}</option>
+                        {% endfor %}
+                        {% endif %}
+                        <option value="NA">NA</option>
+                    </select><br></strong>
+                </td>
+                <td style="width: 170px;">
+                    <textarea name="rcmnt" id="" cols="30" rows="10" required style="resize: none;">
+                        Comment
+                    </textarea>
+                </td>
+            </tr>
+
+          </form>
+          {% endif %}
+          <!-- new row added -->
+
+        </tbody>
+      </table>
+
+
+
+
+
+      <!-- The popup -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="container">
+            <span class="close">&times;</span>
+            
+        </div>
+    </div>
+
+
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Modules Coverage'
+        },
+        xAxis: {
+            categories: ['Portal', 'RM', 'Internal', 'Backend', 'Android', 'Ios', 'Automation']
+        },
+        series: [{
+            name: 'Pass',
+            data: [
+                {% for entry in dataset %}{{entry.pass_count}}
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            ],
+            color:'green'
+        }, {
+            name: 'Fail',
+            data: [
+                {% for entry in dataset %}{{entry.fail_count}}
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            ],
+            color:'red'
+        }, {
+            name: 'YTS',
+            data: [
+                {% for entry in dataset %}{{entry.yts_count}}
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            ],
+            color:'yellow'
+        }, {
+            name: 'QA Skip',
+            data: [
+                {% for entry in dataset %}{{entry.skip_count}}
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            ],
+            color:'grey'
+        }, {
+            name: 'In Progress',
+            data: [
+                {% for entry in dataset %}{{entry.inprogress_count}}
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            ],
+            color:'orange'
+        }]
+    });
+    </script>
+
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("btnn");
+    
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+    
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+    
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+    
+        }
+    </script>
+      
+</body>
+</html>
